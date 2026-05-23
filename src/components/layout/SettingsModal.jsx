@@ -90,7 +90,6 @@ export default function SettingsModal() {
                   color: 'var(--bg-primary)',
                   overflow: 'hidden',
                   border: '2px solid var(--border-medium)',
-                  boxShadow: '0 2px 12px rgba(0,0,0,0.25)',
                 }}>
                   {user.profile && !imgError ? (
                     <img
@@ -274,38 +273,25 @@ export default function SettingsModal() {
 
               {/* ── ABOUT TAB ── */}
               {tab === 'about' && (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  <SectionLabel>Moon AI</SectionLabel>
-                  <div style={{
-                    padding: '16px', borderRadius: 12,
-                    background: 'var(--bg-primary)',
-                    border: '1px solid var(--border-subtle)',
-                    display: 'flex', flexDirection: 'column', gap: 8,
-                  }}>
-                    {[
-                      { label: 'Version', value: '2.0.0' },
-                      { label: 'Model', value: 'Groq · LLaMA 3' },
-                      { label: 'Build', value: 'Production' },
-                    ].map(({ label, value }) => (
-                      <div key={label} style={{
-                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                        padding: '6px 0',
-                        borderBottom: '1px solid var(--border-subtle)',
-                      }}>
-                        <span style={{ fontSize: 12, color: 'var(--text-tertiary)', fontFamily: 'var(--font-body)' }}>{label}</span>
-                        <span style={{ fontSize: 12, color: 'var(--text-primary)', fontWeight: 600, fontFamily: 'var(--font-mono)' }}>{value}</span>
-                      </div>
-                    ))}
-                    <div style={{
-                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                      padding: '6px 0',
-                    }}>
-                      <span style={{ fontSize: 12, color: 'var(--text-tertiary)', fontFamily: 'var(--font-body)' }}>Status</span>
-                      <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 12, color: '#34d399', fontWeight: 600 }}>
-                        <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#34d399', display: 'inline-block' }} />
-                        Online
-                      </span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                  <div>
+                    <SectionLabel>Legal</SectionLabel>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 8 }}>
+                      <a href="https://moonai.phynex.zylapse.com/terms" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--primary-color)', textDecoration: 'none', fontWeight: 500, fontFamily: 'var(--font-body)' }}>Terms and Conditions</a>
+                      <a href="https://moonai.phynex.zylapse.com/privacypolicy" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--primary-color)', textDecoration: 'none', fontWeight: 500, fontFamily: 'var(--font-body)' }}>Privacy Policy</a>
                     </div>
+                  </div>
+                  
+                  <div style={{
+                    marginTop: 8,
+                    paddingTop: 16,
+                    borderTop: '1px solid var(--border-subtle)',
+                    fontSize: 12,
+                    color: 'var(--text-tertiary)',
+                    fontFamily: 'var(--font-body)',
+                    textAlign: 'center'
+                  }}>
+                    A collaboration of Zylapse & Phynex
                   </div>
                 </div>
               )}
