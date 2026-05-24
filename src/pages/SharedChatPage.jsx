@@ -208,7 +208,6 @@ export default function SharedChatPage() {
               )
             })}
           </motion.div>
-          </motion.div>
         )}
           </div>
 
