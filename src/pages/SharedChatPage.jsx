@@ -156,7 +156,7 @@ export default function SharedChatPage() {
               background: 'var(--primary-color)',
               border: 'none',
               borderRadius: '999px',
-              color: 'white',
+              color: 'var(--bg-primary)',
               cursor: 'pointer',
               fontSize: 13,
               fontWeight: 600,
