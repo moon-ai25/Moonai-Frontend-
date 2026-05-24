@@ -43,6 +43,7 @@ const MessageBubble = memo(function MessageBubble({
   isPinned,
   searchQuery,
   isGenerating,
+  readonly,
 }) {
   const [isHovered, setIsHovered] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
@@ -337,26 +338,28 @@ const MessageBubble = memo(function MessageBubble({
         {/* Timestamp removed as requested */}
 
         {/* Action bar on hover (Space is reserved to prevent jump) */}
-        <div style={{ height: 30, display: 'flex', alignItems: 'center', marginTop: -2 }}>
-          <motion.div
-            initial={false}
-            animate={{ 
-              opacity: (isHovered && !isGenerating && !isEditing) ? 1 : 0,
-              y: (isHovered && !isGenerating && !isEditing) ? 0 : 4,
-              pointerEvents: (isHovered && !isGenerating && !isEditing) ? 'auto' : 'none'
-            }}
-            transition={{ duration: 0.2 }}
-          >
-            <MessageActions
-              message={message}
-              messageIndex={messageIndex}
-              onEdit={() => setIsEditing(true)}
-              onRegenerate={onRegenerate}
-              onPin={onPin}
-              isPinned={isPinned}
-            />
-          </motion.div>
-        </div>
+        {!readonly && (
+          <div style={{ height: 30, display: 'flex', alignItems: 'center', marginTop: -2 }}>
+            <motion.div
+              initial={false}
+              animate={{ 
+                opacity: (isHovered && !isGenerating && !isEditing) ? 1 : 0,
+                y: (isHovered && !isGenerating && !isEditing) ? 0 : 4,
+                pointerEvents: (isHovered && !isGenerating && !isEditing) ? 'auto' : 'none'
+              }}
+              transition={{ duration: 0.2 }}
+            >
+              <MessageActions
+                message={message}
+                messageIndex={messageIndex}
+                onEdit={() => setIsEditing(true)}
+                onRegenerate={onRegenerate}
+                onPin={onPin}
+                isPinned={isPinned}
+              />
+            </motion.div>
+          </div>
+        )}
       </div>
 
       {/* User spacer */}

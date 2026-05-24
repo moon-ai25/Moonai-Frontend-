@@ -39,67 +39,111 @@ export default function SharedChatPage() {
         flexDirection: 'column',
       }}
     >
-      {/* Header */}
+      {/* Floating Two Island Top Bar */}
       <header
         style={{
-          padding: '16px 24px',
-          borderBottom: '1px solid var(--border-subtle)',
-          background: 'rgba(10,10,15,0.9)',
-          backdropFilter: 'blur(20px)',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
           display: 'flex',
           alignItems: 'center',
-          gap: 14,
-          position: 'sticky',
-          top: 0,
+          justifyContent: 'space-between',
+          padding: '12px 16px',
+          background: 'transparent',
           zIndex: 10,
+          pointerEvents: 'none',
         }}
       >
-        <Link to="/" style={{ display: 'flex', alignItems: 'center', color: 'var(--text-tertiary)', textDecoration: 'none' }}>
-          <ArrowLeft size={18} />
-        </Link>
-
-        <MoonLogo />
-        <span style={{ fontFamily: 'var(--font-display)', fontSize: 16, fontWeight: 700, color: 'var(--text-primary)' }}>
-          Moon AI
-        </span>
-
-        {chat && (
-          <div style={{ flex: 1, overflow: 'hidden' }}>
-            <div style={{ fontSize: 13, color: 'var(--text-secondary)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-              {chat.title}
-            </div>
-            <div style={{ fontSize: 11, color: 'var(--text-tertiary)' }}>
-              Shared by @{chat.username}
-            </div>
-          </div>
-        )}
-
-        <Link
-          to="/"
+        {/* Left Pill */}
+        <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 6,
-            padding: '8px 16px',
-            background: 'linear-gradient(135deg, #7c3aed, #8b5cf6)',
-            border: 'none',
-            borderRadius: 'var(--radius-md)',
-            color: 'white',
-            textDecoration: 'none',
-            fontSize: 13,
-            fontWeight: 600,
-            fontFamily: 'var(--font-body)',
-            boxShadow: '0 2px 12px rgba(124,58,237,0.4)',
-            flexShrink: 0,
+            gap: 12,
+            background: 'var(--bg-elevated)',
+            padding: '6px 16px 6px 6px',
+            borderRadius: '999px',
+            border: '1px solid var(--border-subtle)',
+            boxShadow: 'var(--shadow-card)',
+            pointerEvents: 'auto',
           }}
         >
-          <ExternalLink size={13} />
-          Continue in App
-        </Link>
-      </header>
+          <Link
+            to="/"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: 32,
+              height: 32,
+              borderRadius: '50%',
+              background: 'var(--bg-hover)',
+              border: 'none',
+              color: 'var(--text-primary)',
+              textDecoration: 'none',
+              transition: 'background 0.2s',
+            }}
+          >
+            <ArrowLeft size={16} />
+          </Link>
+          <div style={{ display: 'flex', alignItems: 'center', overflow: 'hidden', paddingRight: 4 }}>
+            <span
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 14,
+                fontWeight: 500,
+                color: 'var(--text-secondary)',
+                display: 'block',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {chat ? chat.title : 'Loading...'}
+            </span>
+          </div>
+        </div>
 
+        {/* Right Pill */}
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            background: 'var(--bg-elevated)',
+            padding: '2px',
+            borderRadius: '999px',
+            border: '1px solid var(--border-subtle)',
+            boxShadow: 'var(--shadow-card)',
+            pointerEvents: 'auto',
+          }}
+        >
+          <Link
+            to="/"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              padding: '8px 16px',
+              background: 'linear-gradient(135deg, #7c3aed, #8b5cf6)',
+              border: 'none',
+              borderRadius: '999px',
+              color: 'white',
+              textDecoration: 'none',
+              fontSize: 13,
+              fontWeight: 600,
+              fontFamily: 'var(--font-body)',
+              boxShadow: '0 2px 12px rgba(124,58,237,0.4)',
+              flexShrink: 0,
+            }}
+          >
+            <ExternalLink size={13} />
+            Continue in App
+          </Link>
+        </div>
+      </header>
       {/* Content */}
-      <div style={{ flex: 1, maxWidth: 760, margin: '0 auto', width: '100%', padding: '24px 20px' }}>
+      <div style={{ flex: 1, maxWidth: 760, margin: '0 auto', width: '100%', padding: '80px 20px 24px' }}>
         {loading && (
           <div style={{ display: 'flex', justifyContent: 'center', padding: 60 }}>
             <Spinner size={36} />
@@ -128,6 +172,7 @@ export default function SharedChatPage() {
                   key={i}
                   message={{ ...msg, id: String(i), timestamp: msg.createdAt || new Date().toISOString() }}
                   isFirst={!prevMsg || prevMsg.role !== msg.role}
+                  readonly={true}
                 />
               )
             })}
