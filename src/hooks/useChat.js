@@ -206,6 +206,7 @@ export default function useChat() {
           })
         }
 
+        useChatStore.getState().moveChatToTop(title || currentTitle)
         scheduleSave(finalMessages, title || currentTitle, currentChatId)
       } catch (err) {
         if (err.name === 'CanceledError' || controller.signal.aborted) {

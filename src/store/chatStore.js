@@ -66,6 +66,14 @@ const useChatStore = create((set, get) => ({
         c.title === oldTitle ? { ...c, title: newTitle, ...(newId ? { _id: newId, chatId: newId } : {}) } : c
       ),
     })),
+  moveChatToTop: (title) =>
+    set((s) => {
+      const chatIndex = s.chatList.findIndex((c) => c.title === title)
+      if (chatIndex <= 0) return { chatList: s.chatList } // Already at top or not found
+      const chat = { ...s.chatList[chatIndex], updatedAt: new Date().toISOString() }
+      const newChatList = [chat, ...s.chatList.slice(0, chatIndex), ...s.chatList.slice(chatIndex + 1)]
+      return { chatList: newChatList }
+    }),
 
   // ─── Pinned messages ─────────────────────────────
   pinnedMessages: [],
