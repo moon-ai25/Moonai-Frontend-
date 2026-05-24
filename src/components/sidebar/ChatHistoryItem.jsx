@@ -60,7 +60,7 @@ export default function ChatHistoryItem({ chat, isActive, onClick, username }) {
   const handleShare = async () => {
     try {
       const data = await shareChat(username, chat.title)
-      const link = `https://moon-ai.info/shared/${data.shareId}`
+      const link = `${window.location.origin}/shared/${data.shareId}`
       await navigator.clipboard.writeText(link)
       toast.success('Share link copied! 🔗')
     } catch {
