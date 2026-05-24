@@ -386,7 +386,6 @@ export default function Sidebar({ isOpen }) {
           ))
         ) : (
           <div style={{ padding: '32px 16px', textAlign: 'center', color: 'var(--text-tertiary)', fontSize: 13 }}>
-            <div style={{ marginBottom: 8, fontSize: 22 }}>🌙</div>
             {localSearchQuery ? 'No matching chats' : 'No conversations yet'}
           </div>
         )}

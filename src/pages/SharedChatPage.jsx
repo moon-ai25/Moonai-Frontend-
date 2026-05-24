@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ExternalLink, ArrowLeft } from 'lucide-react'
-import { getSharedChat } from '../api/moonai'
+import { getSharedChat, saveChat } from '../api/moonai'
 import MessageBubble from '../components/chat/MessageBubble'
+import SidePanel from '../components/chat/SidePanel'
 import Spinner from '../components/ui/Spinner'
+import useChatStore from '../store/chatStore'
 
 const MoonLogo = () => (
   <svg
@@ -19,9 +21,35 @@ const MoonLogo = () => (
 
 export default function SharedChatPage() {
   const { shareId } = useParams()
+  const navigate = useNavigate()
+  const { user, setMessages, setCurrentTitle, setCurrentChatId } = useChatStore()
+  
   const [chat, setChat] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+
+  const handleContinueChat = async (e) => {
+    e.preventDefault()
+    if (!chat || !chat.messages) return
+
+    setMessages(chat.messages)
+    setCurrentTitle(chat.title)
+
+    if (user?.username) {
+      try {
+        const res = await saveChat(user.userId || null, user.username, chat.title, chat.messages, 'Default')
+        if (res.chatId) {
+          setCurrentChatId(res.chatId)
+        }
+      } catch (err) {
+        console.error('Failed to clone shared chat:', err)
+      }
+    } else {
+      setCurrentChatId(null)
+    }
+
+    navigate('/')
+  }
 
   useEffect(() => {
     getSharedChat(shareId)
@@ -118,32 +146,35 @@ export default function SharedChatPage() {
             pointerEvents: 'auto',
           }}
         >
-          <Link
-            to="/"
+          <button
+            onClick={handleContinueChat}
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: 6,
               padding: '8px 16px',
-              background: 'linear-gradient(135deg, #7c3aed, #8b5cf6)',
+              background: 'var(--primary-color)',
               border: 'none',
               borderRadius: '999px',
               color: 'white',
-              textDecoration: 'none',
+              cursor: 'pointer',
               fontSize: 13,
               fontWeight: 600,
               fontFamily: 'var(--font-body)',
-              boxShadow: '0 2px 12px rgba(124,58,237,0.4)',
+              boxShadow: '0 2px 12px var(--primary-transparent)',
               flexShrink: 0,
             }}
           >
             <ExternalLink size={13} />
-            Continue in App
-          </Link>
+            Continue Chat
+          </button>
         </div>
       </header>
-      {/* Content */}
-      <div style={{ flex: 1, maxWidth: 760, margin: '0 auto', width: '100%', padding: '80px 20px 24px' }}>
+      {/* Main Layout Area */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'row', overflow: 'hidden', position: 'relative' }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflowY: 'auto' }}>
+          {/* Content */}
+          <div style={{ flex: 1, maxWidth: 760, margin: '0 auto', width: '100%', padding: '80px 20px 24px' }}>
         {loading && (
           <div style={{ display: 'flex', justifyContent: 'center', padding: 60 }}>
             <Spinner size={36} />
@@ -177,21 +208,28 @@ export default function SharedChatPage() {
               )
             })}
           </motion.div>
+          </motion.div>
         )}
-      </div>
+          </div>
 
-      {/* Read-only footer */}
-      <div
-        style={{
-          padding: '16px 24px',
-          borderTop: '1px solid var(--border-subtle)',
-          textAlign: 'center',
-          color: 'var(--text-tertiary)',
-          fontSize: 13,
-        }}
-      >
-        This is a read-only shared conversation from Moon AI •{' '}
-        <Link to="/" style={{ color: 'var(--primary-color)' }}>Start your own chat →</Link>
+          {/* Read-only footer */}
+          <div
+            style={{
+              padding: '16px 24px',
+              borderTop: '1px solid var(--border-subtle)',
+              textAlign: 'center',
+              color: 'var(--text-tertiary)',
+              fontSize: 13,
+            }}
+          >
+            This is a read-only shared conversation from Moon AI •{' '}
+            <Link to="/" style={{ color: 'var(--primary-color)' }}>Start your own chat →</Link>
+          </div>
+        </div>
+
+        <AnimatePresence>
+          <SidePanel />
+        </AnimatePresence>
       </div>
     </div>
   )
