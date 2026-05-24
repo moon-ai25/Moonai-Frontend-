@@ -30,8 +30,8 @@ export default function useChat() {
   const scheduleSave = useCallback(
     (msgs, title, chatId) => {
       if (!user || !title) return
-      clearTimeout(saveTimerRef.current)
-      saveTimerRef.current = setTimeout(async () => {
+      
+      const executeSave = async () => {
         try {
           const res = await saveChat(
             user.userId,
@@ -52,7 +52,17 @@ export default function useChat() {
         } catch {
           // silent fail
         }
-      }, 2000)
+      }
+
+      clearTimeout(saveTimerRef.current)
+      
+      if (!chatId) {
+        // First save for a new chat -> save immediately to prevent data loss on fast refresh
+        executeSave()
+      } else {
+        // Subsequent saves -> debounce by 2000ms
+        saveTimerRef.current = setTimeout(executeSave, 2000)
+      }
     },
     [user]
   )
