@@ -174,16 +174,26 @@ export default function useChat() {
         if (!title && updatedMessages.length === 1) {
           try {
             title = await generateTitle(finalContent.trim())
-            setCurrentTitle(title)
-            addChatToList({
-              title,
-              username: user?.username,
-              updatedAt: new Date().toISOString(),
-            })
           } catch {
             title = finalContent.slice(0, 40) + (finalContent.length > 40 ? '…' : '')
-            setCurrentTitle(title)
           }
+          
+          // Ensure title uniqueness to prevent chats merging
+          const existingTitles = useChatStore.getState().chatList.map(c => c.title)
+          let uniqueTitle = title
+          let counter = 1
+          while (existingTitles.includes(uniqueTitle)) {
+            uniqueTitle = `${title} (${counter})`
+            counter++
+          }
+          title = uniqueTitle
+
+          setCurrentTitle(title)
+          addChatToList({
+            title,
+            username: user?.username,
+            updatedAt: new Date().toISOString(),
+          })
         }
 
         scheduleSave(finalMessages, title || currentTitle, currentChatId)
