@@ -179,7 +179,7 @@ export default function ChatWindow({ onSendSuggestion, attachedFiles }) {
                   marginBottom: isTempChat ? 16 : 32,
                 }}
               >
-                {isTempChat ? 'Private Moon' : `${getGreeting()}${user?.username ? `, ${user.username}` : ''}`}
+                {isTempChat ? 'Private Moon' : `${getGreeting()}${user ? `, ${user.name || user.username}` : ''}`}
               </motion.h2>
 
               {isTempChat && (

@@ -69,6 +69,7 @@ export default function Sidebar({ isOpen }) {
   const { openSearch } = useSearch()
   const { logout } = useAuth()
   const loadedRef = useRef(false)
+  const activeChatReqRef = useRef(null)
 
   const [userMenuOpen, setUserMenuOpen] = useState(false)
   const [showRecentFloating, setShowRecentFloating] = useState(false)
@@ -99,16 +100,27 @@ export default function Sidebar({ isOpen }) {
 
   const handleChatClick = async (chat) => {
     try {
-      const full = await getChatById(user.username, chat._id || chat.chatId)
+      const targetId = chat._id || chat.chatId
+      activeChatReqRef.current = targetId
 
-      if (full) {
-        loadChat(full)
-        setShowRecentFloating(false)
-      } else {
-        toast.error('Chat data could not be loaded')
+      // Immediate optimistic update to clear current chat & show new title
+      loadChat({ _id: targetId, title: chat.title, messages: [] })
+      setShowRecentFloating(false)
+
+      const full = await getChatById(user.username, targetId)
+
+      // Only load messages if this is still the active clicked chat
+      if (activeChatReqRef.current === targetId) {
+        if (full) {
+          loadChat(full)
+        } else {
+          toast.error('Chat data could not be loaded')
+        }
       }
     } catch {
-      toast.error('Failed to load chat')
+      if (activeChatReqRef.current === (chat._id || chat.chatId)) {
+        toast.error('Failed to load chat')
+      }
     }
   }
 
