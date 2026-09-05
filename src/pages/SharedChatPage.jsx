@@ -115,7 +115,7 @@ export default function SharedChatPage() {
           >
             <ArrowLeft size={16} />
           </Link>
-          <div style={{ display: 'flex', alignItems: 'center', overflow: 'hidden', paddingRight: 4 }}>
+          <div style={{ display: 'flex', alignItems: 'center', overflow: 'hidden', paddingRight: 4, flex: 1 }}>
             <span
               style={{
                 fontFamily: 'var(--font-display)',
@@ -126,6 +126,7 @@ export default function SharedChatPage() {
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
                 whiteSpace: 'nowrap',
+                maxWidth: 'calc(100vw - 190px)' // Reserve space for back button, padding and continue button
               }}
             >
               {chat ? chat.title : 'Loading...'}

@@ -11,6 +11,13 @@ export default function SidePanel() {
   const [copied, setCopied] = useState(false)
   const [viewMode, setViewMode] = useState('code') // 'code' or 'preview'
   const [isResizing, setIsResizing] = useState(false)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -119,14 +126,17 @@ export default function SidePanel() {
         exit={{ x: '100%', opacity: 0 }}
         transition={{ type: 'spring', damping: 30, stiffness: 250 }}
         style={{
-          width: sidePanelWidth,
+          width: isMobile ? '100%' : sidePanelWidth,
           height: '100%',
           background: 'var(--bg-primary)',
           borderLeft: '1px solid var(--border-medium)',
           display: 'flex',
           flexDirection: 'column',
           zIndex: 50,
-          position: 'relative',
+          position: isMobile ? 'absolute' : 'relative',
+          top: 0,
+          right: 0,
+          bottom: 0,
         }}
       >
         {/* Resize Handle */}

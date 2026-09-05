@@ -34,7 +34,7 @@ export default function ChatHistoryItem({ chat, isActive, onClick, username }) {
       return
     }
     try {
-      await renameChat(username, chat.title, renameVal.trim())
+      await renameChat(username, chat.title, renameVal.trim(), chat._id)
       renameChatInList(chat.title, renameVal.trim())
       toast.success('Chat renamed')
     } catch {
@@ -46,7 +46,7 @@ export default function ChatHistoryItem({ chat, isActive, onClick, username }) {
 
   const handleDelete = async () => {
     try {
-      await deleteChat(username, chat.title)
+      await deleteChat(username, chat.title, chat._id)
       removeChatFromList(chat.title)
       newChat()
       toast.success('Chat deleted')

@@ -56,11 +56,11 @@ export const getChatByQuery = (username, title) =>
 export const getChatById = (username, chatId) =>
   api.get(`/api/chat/${username}/${chatId}`).then((r) => r.data)
 
-export const deleteChat = (username, title) =>
-  api.post('/api/delete-chat', { username, title }).then((r) => r.data)
+export const deleteChat = (username, title, chatId) =>
+  api.post('/api/delete-chat', { username, title, chatId }).then((r) => r.data)
 
-export const renameChat = (username, oldTitle, newTitle) =>
-  api.post('/api/rename-chat', { username, oldTitle, newTitle }).then((r) => r.data)
+export const renameChat = (username, oldTitle, newTitle, chatId) =>
+  api.post('/api/rename-chat', { username, oldTitle, newTitle, chatId }).then((r) => r.data)
 
 export const shareChat = (username, title) =>
   api.post('/api/share-chat', { username, title }).then((r) => r.data)
