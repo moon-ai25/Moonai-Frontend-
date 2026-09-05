@@ -1,6 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function PrivacyPolicyPage() {
+  useEffect(() => {
+    document.body.classList.add('scrollable-page')
+    return () => document.body.classList.remove('scrollable-page')
+  }, [])
+
   return (
     <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}>
       {/* Top Header */}

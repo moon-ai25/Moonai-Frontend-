@@ -156,6 +156,14 @@ body {
   overflow: hidden;
 }
 
+/* Used by full-page scrollable routes like Terms & Privacy */
+body.scrollable-page,
+body.scrollable-page #root {
+  overflow: auto;
+  height: auto;
+  min-height: 100vh;
+}
+
 /* ---------- Scrollbar Styling ---------- */
 ::-webkit-scrollbar {
   width: 6px;
