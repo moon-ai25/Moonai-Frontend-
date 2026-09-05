@@ -1,9 +1,19 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import Lottie from 'lottie-react'
-import shapeSpinner from '../../assets/shape_spinner.json'
 
 export default function TypingIndicator() {
+  const dotVariants = {
+    initial: { y: 0 },
+    animate: { y: -4 }
+  }
+
+  const transition = {
+    duration: 0.5,
+    repeat: Infinity,
+    repeatType: 'reverse',
+    ease: 'easeInOut'
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -27,18 +37,30 @@ export default function TypingIndicator() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '4px 12px',
+            gap: '4px',
+            padding: '10px 14px',
             background: 'var(--bg-elevated)',
             border: '1px solid var(--border-subtle)',
             borderRadius: '18px 18px 18px 4px',
-            width: 'fit-content'
+            width: 'fit-content',
+            height: '36px'
           }}
         >
-          <Lottie 
-            animationData={shapeSpinner} 
-            loop={true} 
-            style={{ width: 40, height: 24 }} 
-          />
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              variants={dotVariants}
+              initial="initial"
+              animate="animate"
+              transition={{ ...transition, delay: i * 0.15 }}
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: '50%',
+                background: 'var(--primary-color)'
+              }}
+            />
+          ))}
         </div>
       </div>
     </motion.div>
