@@ -2,18 +2,89 @@ import React from 'react'
 
 export default function TermsPage() {
   return (
-    <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}>
-      <h1 style={{ color: 'var(--accent-primary)', marginBottom: '20px' }}>Terms of Service</h1>
-      
-      <h2>1. Terms of Service</h2>
-      <p>Welcome to Moon AI. By accessing or using our application, you agree to be bound by these terms. Moon AI provides an AI-powered conversational interface. You agree not to misuse the service or help anyone else do so.</p>
-      
-      <h2 style={{ marginTop: '20px' }}>2. User Responsibilities</h2>
-      <p>You are responsible for the activity that happens on or through your account. Please do not share sensitive personal information (such as passwords, credit card numbers, or social security numbers) with the AI.</p>
-      
-      <div style={{ marginTop: '40px', paddingTop: '20px', borderTop: '1px solid var(--border-medium)', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-        Last updated: September 2026
-      </div>
+    <div style={{ minHeight: '100vh', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', fontFamily: 'var(--font-body)' }}>
+      {/* Top Header */}
+      <header style={{ padding: '24px 40px', borderBottom: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center' }}>
+        <a href="/" style={{ textDecoration: 'none' }}>
+          <h1 style={{ 
+            fontFamily: "'Pixelify Sans', var(--font-display)", 
+            fontSize: '32px', 
+            fontWeight: 700,
+            background: 'linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            margin: 0
+          }}>
+            Moon AI
+          </h1>
+        </a>
+      </header>
+
+      {/* Content */}
+      <main style={{ padding: '40px', maxWidth: '800px', margin: '0 auto', lineHeight: 1.7 }}>
+        <h1 style={{ color: 'var(--accent-primary)', marginBottom: '32px', fontSize: '2.5rem' }}>Terms of Service</h1>
+        
+        <p style={{ fontSize: '1.1rem', marginBottom: '24px', color: 'var(--text-secondary)' }}>
+          Last updated: September 2026
+        </p>
+
+        <p>
+          Welcome to Moon AI! These Terms of Service ("Terms") govern your use of the Moon AI application, website, and related services operated by Zylapse. By accessing or using our platform, you agree to be bound by these Terms and our Privacy Policy.
+        </p>
+        
+        <h2 style={{ marginTop: '32px', marginBottom: '16px' }}>1. Acceptance of Terms</h2>
+        <p>
+          By creating an account, accessing, or using the Moon AI platform, you agree to comply with and be bound by these Terms. If you do not agree with any part of these Terms, you may not access or use the service.
+        </p>
+
+        <h2 style={{ marginTop: '32px', marginBottom: '16px' }}>2. Use of the Service</h2>
+        <p>
+          Moon AI provides an artificial intelligence-powered conversational interface for productivity, ideation, and assistance. You agree to use the service only for lawful purposes. You must not use the service to:
+        </p>
+        <ul style={{ paddingLeft: '20px', marginBottom: '16px' }}>
+          <li style={{ marginBottom: '8px' }}>Generate, distribute, or promote illegal, harmful, or abusive content.</li>
+          <li style={{ marginBottom: '8px' }}>Attempt to reverse-engineer, decompile, or bypass the security mechanisms of our AI models and infrastructure.</li>
+          <li style={{ marginBottom: '8px' }}>Impersonate another person or entity, or falsely state your affiliation with a person or entity.</li>
+          <li style={{ marginBottom: '8px' }}>Spam, scrape, or otherwise extract data in bulk from the platform without explicit permission.</li>
+        </ul>
+
+        <h2 style={{ marginTop: '32px', marginBottom: '16px' }}>3. User Accounts</h2>
+        <p>
+          To access certain features of the service, you must register for an account. You agree to provide accurate and complete information and to keep this information up to date. You are solely responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. 
+        </p>
+
+        <h2 style={{ marginTop: '32px', marginBottom: '16px' }}>4. Content Ownership and Licensing</h2>
+        <p>
+          <strong>Your Content:</strong> You retain ownership of the input data and prompts you provide to Moon AI. By using the service, you grant us a worldwide, royalty-free license to use, process, and store your content strictly for the purpose of operating and providing the service.
+        </p>
+        <p>
+          <strong>Generated Output:</strong> Subject to your compliance with these Terms, you may use the content generated by Moon AI for any legal purpose, including commercial purposes. Moon AI claims no ownership over the generated output you create.
+        </p>
+
+        <h2 style={{ marginTop: '32px', marginBottom: '16px' }}>5. Limitation of Liability</h2>
+        <p>
+          To the maximum extent permitted by applicable law, Moon AI, its developers, and Zylapse shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from:
+        </p>
+        <ul style={{ paddingLeft: '20px', marginBottom: '16px' }}>
+          <li style={{ marginBottom: '8px' }}>Your access to or use of, or inability to access or use, the service.</li>
+          <li style={{ marginBottom: '8px' }}>Any conduct or content of any third party on the service.</li>
+          <li style={{ marginBottom: '8px' }}>Any unauthorized access, use, or alteration of your transmissions or content.</li>
+        </ul>
+
+        <h2 style={{ marginTop: '32px', marginBottom: '16px' }}>6. Termination</h2>
+        <p>
+          We may terminate or suspend your account and access to the service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach these Terms. Upon termination, your right to use the service will immediately cease.
+        </p>
+
+        <h2 style={{ marginTop: '32px', marginBottom: '16px' }}>7. Changes to Terms</h2>
+        <p>
+          We reserve the right to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.
+        </p>
+
+        <div style={{ marginTop: '60px', paddingTop: '20px', borderTop: '1px solid var(--border-medium)', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+          If you have any questions about these Terms, please contact us at our official support channels.
+        </div>
+      </main>
     </div>
   )
 }
