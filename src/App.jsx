@@ -11,6 +11,8 @@ import Spinner from './components/ui/Spinner'
 const ChatPage = lazy(() => import('./pages/ChatPage'))
 const SharedChatPage = lazy(() => import('./pages/SharedChatPage'))
 const PreviewPage = lazy(() => import('./pages/PreviewPage'))
+const TermsPage = lazy(() => import('./pages/TermsPage'))
+const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'))
 
 function PageLoader() {
   return (
@@ -85,6 +87,8 @@ export default function App() {
           />
           <Route path="/shared/:shareId" element={<SharedChatPage />} />
           <Route path="/preview" element={<PreviewPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicyPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

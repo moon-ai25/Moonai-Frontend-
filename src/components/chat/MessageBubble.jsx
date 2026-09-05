@@ -37,6 +37,7 @@ const MessageBubble = memo(function MessageBubble({
   message,
   messageIndex,
   isFirst,
+  isLastMessage,
   onEdit,
   onRegenerate,
   onPin,
@@ -356,6 +357,7 @@ const MessageBubble = memo(function MessageBubble({
                 onRegenerate={onRegenerate}
                 onPin={onPin}
                 isPinned={isPinned}
+                isLastMessage={isLastMessage}
               />
             </motion.div>
           </div>

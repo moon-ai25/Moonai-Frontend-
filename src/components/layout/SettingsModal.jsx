@@ -277,8 +277,8 @@ export default function SettingsModal() {
                   <div>
                     <SectionLabel>Legal</SectionLabel>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginTop: 8 }}>
-                      <a href="https://moonai.phynex.zylapse.com/terms" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--primary-color)', textDecoration: 'none', fontWeight: 500, fontFamily: 'var(--font-body)' }}>Terms and Conditions</a>
-                      <a href="https://moonai.phynex.zylapse.com/privacypolicy" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--primary-color)', textDecoration: 'none', fontWeight: 500, fontFamily: 'var(--font-body)' }}>Privacy Policy</a>
+                      <a href="https://moonai.zylapse.com/terms" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--primary-color)', textDecoration: 'none', fontWeight: 500, fontFamily: 'var(--font-body)' }}>Terms and Conditions</a>
+                      <a href="https://moonai.zylapse.com/privacypolicy" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: 'var(--primary-color)', textDecoration: 'none', fontWeight: 500, fontFamily: 'var(--font-body)' }}>Privacy Policy</a>
                     </div>
                   </div>
                   

@@ -13,6 +13,7 @@ export default function MessageActions({
   onRegenerate,
   onPin,
   isPinned,
+  isLastMessage,
 }) {
   const isUser = message.role === 'user'
   const { user, currentChatId } = useChatStore()
@@ -101,7 +102,7 @@ export default function MessageActions({
       ) : (
         <>
           <ActionBtn icon={<Share2 size={13} />} label="Share" onClick={handleShare} />
-          <ActionBtn icon={<RefreshCw size={13} />} label="Regenerate" onClick={onRegenerate} />
+          {isLastMessage && <ActionBtn icon={<RefreshCw size={13} />} label="Regenerate" onClick={onRegenerate} />}
           <div style={{ width: 1, height: 14, background: 'var(--border-subtle)', margin: '0 2px' }} />
           <ActionBtn
             icon={<ThumbsUp size={13} />}

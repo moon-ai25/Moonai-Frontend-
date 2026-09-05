@@ -226,6 +226,7 @@ export default function ChatWindow({ onSendSuggestion, attachedFiles }) {
                     message={msg}
                     messageIndex={i}
                     isFirst={isFirst}
+                    isLastMessage={i === messages.length - 1}
                     onEdit={(newContent) => editAndResend(i, newContent)}
                     onRegenerate={regenerateLastResponse}
                     onPin={() => pin(msg)}
