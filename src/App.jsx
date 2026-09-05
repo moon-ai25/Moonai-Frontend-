@@ -13,6 +13,7 @@ const SharedChatPage = lazy(() => import('./pages/SharedChatPage'))
 const PreviewPage = lazy(() => import('./pages/PreviewPage'))
 const TermsPage = lazy(() => import('./pages/TermsPage'))
 const PrivacyPolicyPage = lazy(() => import('./pages/PrivacyPolicyPage'))
+const DeleteAccountPage = lazy(() => import('./pages/DeleteAccountPage'))
 
 function PageLoader() {
   return (
@@ -89,6 +90,7 @@ export default function App() {
           <Route path="/preview" element={<PreviewPage />} />
           <Route path="/terms" element={<TermsPage />} />
           <Route path="/privacypolicy" element={<PrivacyPolicyPage />} />
+          <Route path="/deleteaccount" element={<DeleteAccountPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>

@@ -118,4 +118,7 @@ export const generateTitle = (firstUserMessage) =>
     })
     .then((r) => r.data?.reply?.trim().replace(/['"]/g, '').slice(0, 60) || 'New Chat')
 
+export const deleteAccount = (username, password) =>
+  api.post('/api/delete-account', { username, password }).then((r) => r.data)
+
 export default api
